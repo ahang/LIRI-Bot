@@ -14,16 +14,24 @@ var myTweets = function() {
 
     twitKeys.get("statuses/user_timeline", params, function(err, data) {
         if (!err) {
-            console.log("About to test loop");
+            //console.log("About to test loop");
             for (var i = 0; i < data.length; i++) {
-                console.log("Testing Loop");
+                //console.log("Testing Loop" + [i]);
+                var user = params.screen_name;
                 var tweets = data[i].text;
-                console.log(tweets);
+                var time = data[i].created_at;
+                console.log("----------------" + time + "--------------------------");
+                console.log("------------" + "@" + user + "------------");
+                console.log("------------tweeted ------------");
+                console.log("----" + tweets + " ----");
+                console.log("------------------------------------------------------");
             }
+            //console.log(tweets);
         } else {
             console.log("There was an err of " + err);
         }
     });
 };
 
-myTweets;
+myTweets();
+//-----------------------------
