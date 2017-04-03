@@ -6,7 +6,17 @@ var twitKeys = new twitter(keys.twitterKeys);
 //console.log(twitKeys);
 //-----------------------------
 
-exports.myTweets = function() {
+//---------Switch-------------
+var action = process.argv[2];
+
+switch (action) {
+    case "my-tweet":
+    myTweets();
+    break;
+}
+
+function myTweets() {
+
     var params = {
         screen_name: "ahang_1",
         count: 20
@@ -21,7 +31,7 @@ exports.myTweets = function() {
                 var tweets = data[i].text;
                 var time = data[i].created_at;
                 console.log("----------------" + time + "--------------------------");
-                console.log("@" + user + "said");
+                console.log("@" + user + " said");
                 console.log(tweets);
                 console.log("------------------------------------------------------");
             }
@@ -32,5 +42,4 @@ exports.myTweets = function() {
     });
 };
 
-myTweets();
 //-----------------------------
