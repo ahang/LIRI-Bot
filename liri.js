@@ -1,4 +1,6 @@
 //---------DEPENDENCIES-------------
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
+
 var twitter = require("twitter");
 var keys = require("./key.js");
 var twitKeys = new twitter(keys.twitterKeys);
@@ -56,7 +58,7 @@ function myTweets() {
     });
 };
 
-var candy = function spot(userInput) {
+function spotify(userInput) {
     console.log("Test");
     var trackName = userInput || "The Sign Ace of Base";
     console.log(trackName);
@@ -67,11 +69,13 @@ var candy = function spot(userInput) {
              console.log('Error occurred: ' + err);
              return;
         } else {
+            var track = data.tracks.items[0];
             console.log("No errors beginning data retrieval");
-            console.log(data);
+            console.log("The Artist(s) is " + track.artists[0].name);
+            console.log("The name of the song is " + "'" + track.name + "'");
+            console.log("Link: " + track.preview_url);
+            console.log("The album is called " + track.album.name + "and this song is track number " + track.track_number);
         }
     });
 }
-candy();
-
 //-----------------------------
