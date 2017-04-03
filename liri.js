@@ -108,6 +108,5 @@ function movie(userInput) {
         }
     });
 }
-movie("The Matrix");
 
 //-----------------------------
