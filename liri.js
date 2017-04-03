@@ -1,7 +1,9 @@
-//---------TWITTER-------------
+//---------DEPENDICIES-------------
 var twitter = require("twitter");
 var keys = require("./key.js");
 var twitKeys = new twitter(keys.twitterKeys);
+var spotify = require("spotify");
+var request = require("request");
 
 //console.log(twitKeys);
 //-----------------------------
@@ -12,6 +14,18 @@ var action = process.argv[2];
 switch (action) {
     case "my-tweet":
     myTweets();
+    break;
+
+    case "spotify-this-song":
+    spotify();
+    break;
+
+    case "movie-this":
+    movie();
+    break;
+
+    case "do-what-it-says":
+    doIt();
     break;
 }
 
@@ -41,5 +55,9 @@ function myTweets() {
         }
     });
 };
+
+function spotify() {
+    
+}
 
 //-----------------------------
