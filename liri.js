@@ -12,6 +12,7 @@ var request = require("request");
 
 //---------Switch-------------
 var action = process.argv[2];
+var command = process.argv[3];
 
 switch (action) {
     case "my-tweet":
@@ -19,7 +20,7 @@ switch (action) {
     break;
 
     case "spotify-this-song":
-    spotify();
+    findTrack(command);
     break;
 
     case "movie-this":
@@ -58,7 +59,7 @@ function myTweets() {
     });
 };
 
-function spotify(userInput) {
+function findTrack(userInput) {
     console.log("Test");
     var trackName = userInput || "The Sign Ace of Base";
     console.log(trackName);
