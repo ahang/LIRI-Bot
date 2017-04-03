@@ -1,4 +1,4 @@
-//---------DEPENDICIES-------------
+//---------DEPENDENCIES-------------
 var twitter = require("twitter");
 var keys = require("./key.js");
 var twitKeys = new twitter(keys.twitterKeys);
@@ -56,8 +56,22 @@ function myTweets() {
     });
 };
 
-function spotify() {
-    
+var candy = function spot(userInput) {
+    console.log("Test");
+    var trackName = userInput || "The Sign Ace of Base";
+    console.log(trackName);
+
+    spotify.search({ type: "track", query: trackName}, function(err, data) {
+        console.log("Beginning Query");
+        if (err) {
+             console.log('Error occurred: ' + err);
+             return;
+        } else {
+            console.log("No errors beginning data retrieval");
+            console.log(data);
+        }
+    });
 }
+candy();
 
 //-----------------------------
