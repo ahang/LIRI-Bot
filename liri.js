@@ -21,9 +21,8 @@ var myTweets = function() {
                 var tweets = data[i].text;
                 var time = data[i].created_at;
                 console.log("----------------" + time + "--------------------------");
-                console.log("------------" + "@" + user + "------------");
-                console.log("------------tweeted ------------");
-                console.log("----" + tweets + " ----");
+                console.log("@" + user + "said");
+                console.log(tweets);
                 console.log("------------------------------------------------------");
             }
             //console.log(tweets);
