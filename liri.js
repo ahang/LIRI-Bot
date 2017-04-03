@@ -6,7 +6,7 @@ var twitKeys = new twitter(keys.twitterKeys);
 //console.log(twitKeys);
 //-----------------------------
 
-var myTweets = function() {
+exports.myTweets = function() {
     var params = {
         screen_name: "ahang_1",
         count: 20
