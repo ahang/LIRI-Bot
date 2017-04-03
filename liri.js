@@ -101,9 +101,13 @@ function movie(userInput) {
             console.log("The languages in the movie are " + movieInfo.Language);
             console.log("The main actors/actresses are " + movieInfo.Actors);
             console.log("On Rotten Tomato, they gave it a rating of " + movieInfo.Ratings[1].Value);
+            var movieChange = movieInfo.Title.split(" ").join("_");
+            var lowerMovie = movieChange.toLowerCase();
+            console.log("Check out the Rotten Tomato review here https://www.rottentomatoes.com/m/" + lowerMovie);
             console.log("----------------------------")
         }
     });
 }
+movie("The Matrix");
 
 //-----------------------------
