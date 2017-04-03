@@ -1,11 +1,12 @@
 //---------DEPENDENCIES-------------
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
 
 var twitter = require("twitter"); //grabbing twitter npm
 var keys = require("./key.js");
 var twitKeys = new twitter(keys.twitterKeys);
 var spotify = require("spotify");
 var request = require("request");
+var fs = require("fs");
 
 //console.log(twitKeys);
 //-----------------------------
@@ -24,7 +25,7 @@ switch (action) {
     break;
 
     case "movie-this":
-    movie();
+    movie(command);
     break;
 
     case "do-what-it-says":
@@ -71,26 +72,29 @@ function findTrack(userInput) {
              return;
         } else {
             var track = data.tracks.items[0];
+            console.log(track);
             //console.log("No errors beginning data retrieval");
             console.log("The Artist(s) is " + track.artists[0].name);
             console.log("The name of the song is " + "'" + track.name + "'");
             console.log("Link: " + track.preview_url);
-            console.log("The album is called " + track.album.name + "and this song is track number " + track.track_number);
+            console.log("The album is called " + track.album.name + " and this song is track number " + track.track_number);
         }
     });
 }
 
 function movie(userInput) {
-    console.log("Begin movie function");
+    //console.log("Begin movie function");
 
-    var movieName = userInput || "Mr. Nobody";
-    console.log(movieName);
+    var movieName = userInput.split(" ").join("+") || "Mr.+Nobody";
+    //console.log(movieName);
 
-    request("http://www.omdbapi.com/?t=" + movieName, function(err, response, body) {
-        if (err) {
-            console.log("Error occured: " + err);
+    request("http://www.omdbapi.com/?t=" + movieName, function(error, response, body) {
+        var movieInfo = JSON.parse(body);
+        if (error) {
+            return console.log("Error occured: " + error);
+        } else if(movieInfo.Response === "False") { 
+            return console.log("Error occured: " + movieInfo.Error);
         } else {
-            var movieInfo = JSON.parse(body);
             //console.log(movieInfo);
             //console.log(JSON.parse(body));
             console.log("---------------Movie Information-------------")
@@ -104,9 +108,12 @@ function movie(userInput) {
             var movieChange = movieInfo.Title.split(" ").join("_");
             var lowerMovie = movieChange.toLowerCase();
             console.log("Check out the Rotten Tomato review here https://www.rottentomatoes.com/m/" + lowerMovie);
-            console.log("----------------------------")
+            console.log("----------------------------");
         }
     });
 }
 
+function doIt() {
+
+}
 //-----------------------------
