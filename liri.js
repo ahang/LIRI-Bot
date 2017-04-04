@@ -1,7 +1,7 @@
 "use strict";
 
 //---------DEPENDENCIES-------------
-//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
 
 var twitter = require("twitter"); //grabbing twitter npm
 var keys = require("./key.js");
@@ -9,6 +9,7 @@ var twitKeys = new twitter(keys.twitterKeys);
 var spotify = require("spotify");
 var request = require("request");
 var fs = require("fs");
+var input;
 
 //console.log(twitKeys);
 //-----------------------------
@@ -17,7 +18,7 @@ var fs = require("fs");
 var action = process.argv[2];
 var command = process.argv[3];
 
-values(action);
+values("my-tweet");
 
 function values(action, command) {
     switch (action) {
@@ -50,14 +51,17 @@ function myTweets() {
         if (!err) {
             //console.log("About to test loop");
             for (var i = 0; i < data.length; i++) {
+                
                 //console.log("Testing Loop" + [i]);
                 var user = params.screen_name;
                 var tweets = data[i].text;
                 var time = data[i].created_at;
-                console.log("----------------" + time + "--------------------------");
-                console.log("@" + user + " said");
-                console.log(tweets);
-                console.log("------------------------------------------------------");
+                input = ("--------" + time + "--------------------" + "\n" +
+                "                 @" + user + " said" + "\n" +
+                "         " + tweets + "\n" +
+                "----------------------------------------------------------");
+                console.log(input);
+                logs(input);
             }
             //console.log(tweets);
         } else {
@@ -78,8 +82,9 @@ function findTrack(userInput) {
              return;
         } else {
             var track = data.tracks.items[0];
-            console.log(track);
+            //console.log(track);
             //console.log("No errors beginning data retrieval");
+            input = ()
             console.log("The Artist(s) is " + track.artists[0].name);
             console.log("The name of the song is " + "'" + track.name + "'");
             console.log("Link: " + track.preview_url);
@@ -132,11 +137,9 @@ function doIt() {
     });
 }
 
-var logs = function() {
-    fs.appendFile("log.txt", dataFeed, function(err, data) {
-        if (err) {
-            return console.log("Error occured: " + err);
-        }
+var logs = function(data) {
+    fs.appendFile("logs.txt", data, function(err, data) {
+        if (err) throw err;
     })
 }
 //-----------------------------
