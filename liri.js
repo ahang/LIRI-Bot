@@ -131,4 +131,12 @@ function doIt() {
         values(dataArr[0].trim(),dataArr[1].trim()); //feeding the dataArr into the values function
     });
 }
+
+var logs = function() {
+    fs.appendFile("log.txt", dataFeed, function(err, data) {
+        if (err) {
+            return console.log("Error occured: " + err);
+        }
+    })
+}
 //-----------------------------
