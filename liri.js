@@ -17,7 +17,7 @@ var fs = require("fs");
 var action = process.argv[2];
 var command = process.argv[3];
 
-values("movie-this");
+values(action);
 
 function values(action, command) {
     switch (action) {
@@ -62,7 +62,7 @@ function myTweets() {
         if (!err) { //if no error
             //console.log("About to test loop");
             for (var i = 0; i < data.length; i++) {
-                
+
                 //console.log("Testing Loop" + [i]);
                 var time = data[i].created_at;
                 var user = params.screen_name;
@@ -104,8 +104,8 @@ function findTrack(userInput) {
 
 function movie(userInput) {
     //console.log("Begin movie function");
-    console.log(userInput);
-    var movieName = userInput.split(" ").join("+") || "Mr.+Nobody";
+    //console.log(userInput);
+    var movieName = userInput || "Mr.+Nobody";
     //console.log(movieName);
 
     request("http://www.omdbapi.com/?t=" + movieName, function(error, response, body) {
