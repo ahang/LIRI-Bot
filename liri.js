@@ -1,3 +1,5 @@
+"use strict";
+
 //---------DEPENDENCIES-------------
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; //insecure workaround for firewall. temporary
 
@@ -36,7 +38,7 @@ switch (action) {
 function myTweets() {
 
     var params = {
-        screen_name: "ahang_1",
+        screen_name: "ahang_",
         count: 20
     }
 
@@ -92,7 +94,7 @@ function movie(userInput) {
         var movieInfo = JSON.parse(body);
         if (error) {
             return console.log("Error occured: " + error);
-        } else if(movieInfo.Response === "False") { 
+        } else if(movieInfo.Response === "False") {
             return console.log("Error occured: " + movieInfo.Error);
         } else {
             //console.log(movieInfo);
@@ -114,6 +116,16 @@ function movie(userInput) {
 }
 
 function doIt() {
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if(err) throw err;
 
+        console.log(data);
+
+        var dataArr = data.split(",");
+        console.log(dataArr);
+
+        for (var i = 0; i < dataArr.length; i++)
+            console.log(dataArr[i]);
+    });
 }
 //-----------------------------
