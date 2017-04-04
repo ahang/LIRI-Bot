@@ -17,7 +17,7 @@ var fs = require("fs");
 var action = process.argv[2];
 var command = process.argv[3];
 
-values(action);
+values(action, command);
 
 function values(action, command) {
     switch (action) {
@@ -80,9 +80,9 @@ function myTweets() {
     });
 };
 
-function findTrack(userInput) {
+function findTrack(command) {
     //console.log("Test");
-    var trackName = userInput || "The Sign Ace of Base";
+    var trackName = command || "The Sign Ace of Base";
     //console.log(trackName);
 
     spotify.search({ type: "track", query: trackName}, function(err, data) {
@@ -102,10 +102,10 @@ function findTrack(userInput) {
     });
 }
 
-function movie(userInput) {
+function movie(command) {
     //console.log("Begin movie function");
     //console.log(userInput);
-    var movieName = userInput || "Mr.+Nobody";
+    var movieName = command.split(" ").join("+") || "Mr.+Nobody";
     //console.log(movieName);
 
     request("http://www.omdbapi.com/?t=" + movieName, function(error, response, body) {
