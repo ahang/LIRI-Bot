@@ -94,10 +94,12 @@ function findTrack(command) {
             var track = data.tracks.items[0];
             //console.log(track);
             //console.log("No errors beginning data retrieval");
+            debug("------------------------------------------------------");
             debug("The Artist(s) is " + track.artists[0].name);
             debug("The name of the song is " + "'" + track.name + "'");
             debug("Link: " + track.preview_url);
             debug("The album is called " + track.album.name + " and this song is track number " + track.track_number);
+            debug("------------------------------------------------------");
         }
     });
 }
