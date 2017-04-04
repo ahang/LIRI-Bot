@@ -17,22 +17,26 @@ var fs = require("fs");
 var action = process.argv[2];
 var command = process.argv[3];
 
-switch (action) {
-    case "my-tweet":
-    myTweets();
-    break;
+values(action);
 
-    case "spotify-this-song":
-    findTrack(command);
-    break;
+function values(action, command) {
+    switch (action) {
+        case "my-tweet":
+        myTweets();
+        break;
 
-    case "movie-this":
-    movie(command);
-    break;
+        case "spotify-this-song":
+        findTrack(command);
+        break;
 
-    case "do-what-it-says":
-    doIt();
-    break;
+        case "movie-this":
+        movie(command);
+        break;
+
+        case "do-what-it-says":
+        doIt();
+        break;
+    }
 }
 
 function myTweets() {
@@ -119,13 +123,12 @@ function doIt() {
     fs.readFile("random.txt", "utf8", function(err, data) {
         if(err) throw err;
 
-        console.log(data);
+        //console.log(data);
 
-        var dataArr = data.split(",");
-        console.log(dataArr);
+        var dataArr = data.split(","); //splitting at the comma
+        //console.log(dataArr);
 
-        for (var i = 0; i < dataArr.length; i++)
-            console.log(dataArr[i]);
+        values(dataArr[0].trim(),dataArr[1].trim()); //feeding the dataArr into the values function
     });
 }
 //-----------------------------
