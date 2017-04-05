@@ -128,6 +128,8 @@ function movie(command) {
             debug("The main actors/actresses are " + movieInfo.Actors);
             debug("On Rotten Tomato, they gave it a rating of " + movieInfo.Ratings[1].Value);
             var movieChange = movieInfo.Title.split(" ").join("_");
+            movieChange = movieChange.replace(":", "");
+            console.log("movieChange: " + movieChange);
             var lowerMovie = movieChange.toLowerCase();
             debug("Check out the Rotten Tomato review here https://www.rottentomatoes.com/m/" + lowerMovie);
             debug("----------------------------");
