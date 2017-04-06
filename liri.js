@@ -21,7 +21,7 @@ values(action, command);
 
 function values(action, command) {
     switch (action) {
-        case "my-tweet":
+        case "my-tweets":
         myTweets();
         break;
 
@@ -107,7 +107,13 @@ function findTrack(command) {
 function movie(command) {
     //console.log("Begin movie function");
     //console.log(userInput);
-    var movieName = command.split(" ").join("+") || "Mr.+Nobody";
+    if (command === undefined) {
+        command = "Mr.+Nobody";
+    } else {
+        command = command.split(" ").join("+");
+    }
+
+    var movieName = command;
     //console.log(movieName);
 
     request("http://www.omdbapi.com/?t=" + movieName, function(error, response, body) {
@@ -129,7 +135,7 @@ function movie(command) {
             debug("On Rotten Tomato, they gave it a rating of " + movieInfo.Ratings[1].Value);
             var movieChange = movieInfo.Title.split(" ").join("_");
             movieChange = movieChange.replace(":", "");
-            console.log("movieChange: " + movieChange);
+            //console.log("movieChange: " + movieChange);
             var lowerMovie = movieChange.toLowerCase();
             debug("Check out the Rotten Tomato review here https://www.rottentomatoes.com/m/" + lowerMovie);
             debug("----------------------------");
